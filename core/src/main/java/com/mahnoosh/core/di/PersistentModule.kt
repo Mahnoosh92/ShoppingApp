@@ -26,6 +26,9 @@ val persistentModule = module {
     single {
         providePreferencesDataStore(appContext = androidContext())
     }
+    single {
+        provideTestDao(db = get())
+    }
 }
 
 private fun provideAppDatabase(appContext: Context) = Room.databaseBuilder(
@@ -34,6 +37,7 @@ private fun provideAppDatabase(appContext: Context) = Room.databaseBuilder(
     .fallbackToDestructiveMigration()
     .build()
 
+private fun provideTestDao(db: AppDataBase) = db.testDao()
 private fun providePreferencesDataStore(appContext: Context): DataStore<Preferences> {
     return PreferenceDataStoreFactory.create(
         corruptionHandler = ReplaceFileCorruptionHandler(produceNewData = { emptyPreferences() }),
