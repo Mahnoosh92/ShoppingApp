@@ -2,8 +2,6 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'kotlin-parcelize'
-    id "androidx.navigation.safeargs.kotlin"
 }
 apply from: '../dependencies.gradle'
 
@@ -49,70 +47,79 @@ dependencies {
 
     // koin
     api "io.insert-koin:koin-android:$versions.koinVersion"
+    api "io.insert-koin:koin-core:$versions.koinVersion"
     // Jetpack WorkManager
     implementation "io.insert-koin:koin-androidx-workmanager:$versions.koinVersion"
     // Navigation Graph
-    implementation "io.insert-koin:koin-androidx-navigation:$versions.koinVersion"
+    api "io.insert-koin:koin-androidx-navigation:$versions.koinVersion"
 
     // ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0"
     // LiveData
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.0"
+    api "androidx.lifecycle:lifecycle-livedata-ktx:2.6.0"
 
     // Navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    api 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    api 'androidx.navigation:navigation-ui-ktx:2.5.3'
 
     // Networking
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation "com.squareup.okhttp3:okhttp:4.10.0"
-    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
+    api 'com.squareup.retrofit2:converter-gson:2.9.0'
+    api "com.squareup.okhttp3:okhttp:4.10.0"
+    api "com.squareup.okhttp3:logging-interceptor:4.9.0"
 
     // Timber
-    implementation 'com.jakewharton.timber:timber:4.7.1'
+    api 'com.jakewharton.timber:timber:4.7.1'
 
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
     // Coroutine Lifecycle Scopes
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    api "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
 
     // Coil
-    implementation "io.coil-kt:coil:2.2.2"
+    api "io.coil-kt:coil:2.2.2"
 
     // Room
-    implementation "androidx.room:room-runtime:2.4.3"
-    implementation("androidx.room:room-ktx:2.4.3")
+    api "androidx.room:room-runtime:2.4.3"
+    api("androidx.room:room-ktx:2.4.3")
     kapt "androidx.room:room-compiler:2.4.3"
 
     // Lottie
-    implementation 'com.airbnb.android:lottie:4.1.0'
+    api 'com.airbnb.android:lottie:4.1.0'
 
     // Shimmer
-    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+    api 'com.facebook.shimmer:shimmer:0.1.0@aar'
 
     // Test coroutine
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
 
     // Activity-fragment ktx
-    implementation "androidx.activity:activity-ktx:1.6.1"
-    implementation "androidx.fragment:fragment-ktx:1.5.5"
+    api "androidx.activity:activity-ktx:1.6.1"
+    api "androidx.fragment:fragment-ktx:1.5.5"
 
     //DataStore
-    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    api "androidx.datastore:datastore-preferences:1.0.0"
     // Proto datastore
-    implementation  "androidx.datastore:datastore:1.0.0"
+    api  "androidx.datastore:datastore:1.0.0"
     // Starting from Protobuf 3.8.0, use the lite runtime library
-    implementation  "com.google.protobuf:protobuf-javalite:3.21.1"
+    api  "com.google.protobuf:protobuf-javalite:3.21.1"
 
     // Firebase
     // Import the Firebase BoM
-    implementation platform('com.google.firebase:firebase-bom:31.2.3')
+    api platform('com.google.firebase:firebase-bom:31.2.3')
 
     // When using the BoM, don't specify versions in Firebase dependencies
-    implementation 'com.google.firebase:firebase-analytics-ktx'
+    api 'com.google.firebase:firebase-analytics-ktx'
+
+    // Firebase
+    api platform('com.google.firebase:firebase-bom:31.1.1')
+    api 'com.google.firebase:firebase-auth-ktx'
+    api 'com.google.android.gms:play-services-auth:20.4.0'
+    api 'com.google.firebase:firebase-crashlytics-ktx'
+    api 'com.google.firebase:firebase-analytics-ktx'
+
 
 }
