@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dashboard_nav_graph"
+    app:startDestination="@id/categoryScreenContainerFragment">
+
+    <fragment
+        android:id="@+id/categoryScreenContainerFragment"
+        android:name="com.mahnoosh.dashboard.presentation.screen.CategoryScreenContainerFragment"
+        android:label="CategoryScreenContainerFragment" />
+</navigation>

@@ -16,7 +16,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
 
-        buildConfigField "String", "BASE_URL", "\"https://api.newscatcherapi.com/v2/\""
+        buildConfigField "String", "BASE_URL", "\"https://api.escuelajs.co/api/v1/\""
     }
 
     buildTypes {

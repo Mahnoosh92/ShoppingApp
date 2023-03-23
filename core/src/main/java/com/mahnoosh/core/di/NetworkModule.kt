@@ -22,7 +22,7 @@ val networkModule = module {
     }
 }
 
-private fun provideOkHttpClient() {
+private fun provideOkHttpClient(): OkHttpClient {
     val loggingInterceptor = HttpLoggingInterceptor()
     loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
     val builder = OkHttpClient.Builder()
@@ -31,7 +31,7 @@ private fun provideOkHttpClient() {
         .writeTimeout(30, TimeUnit.SECONDS)
         .followRedirects(true)
         .followSslRedirects(true)
-    if (BuildConfig.DEBUG) {
+    return if (BuildConfig.DEBUG) {
         builder.addInterceptor(loggingInterceptor).build()
     } else {
         builder.build()
