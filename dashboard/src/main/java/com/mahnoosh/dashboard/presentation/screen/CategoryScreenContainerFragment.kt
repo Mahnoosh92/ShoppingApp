@@ -53,10 +53,12 @@ class CategoryScreenContainerFragment : BaseFragment() {
     }
 
     override fun setupCollectors() {
+        showLoader()
         viewModel.state.flowWithLifecycle(this.lifecycle).onEach { dashboardState ->
             when (dashboardState) {
                 is DashboardState.Loading -> {}
                 is DashboardState.Categories -> {
+                    hideLoader()
                     viewPager.adapter = ScreenAdapter(this, dashboardState.categories.size)
                     TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                     }.attach()
@@ -69,5 +71,19 @@ class CategoryScreenContainerFragment : BaseFragment() {
 
     override fun setupListeners() {
         /*NO_OP*/
+    }
+
+    private fun showLoader() {
+        binding.apply {
+            loading.visibility = View.VISIBLE
+            pager.visibility = View.GONE
+        }
+    }
+
+    private fun hideLoader() {
+        binding.apply {
+            loading.visibility = View.GONE
+            pager.visibility = View.VISIBLE
+        }
     }
 }

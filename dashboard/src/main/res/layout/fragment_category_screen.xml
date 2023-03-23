@@ -4,7 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="300dp">
 
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:visibility="gone" />
+
     <LinearLayout
+        android:id="@+id/content"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -13,13 +24,17 @@
             android:id="@+id/category_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:scaleType="centerCrop"
             tools:src="@drawable/ic_profile" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/category_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0.2"
             android:gravity="center"
             tools:text="salam" />
     </LinearLayout>
+
 </com.google.android.material.card.MaterialCardView>

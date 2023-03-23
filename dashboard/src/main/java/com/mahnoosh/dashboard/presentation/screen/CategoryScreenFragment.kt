@@ -8,7 +8,11 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import coil.ImageLoader
+import coil.imageLoader
 import coil.load
+import coil.request.ImageRequest
+import coil.transform.CircleCropTransformation
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mahnoosh.core.base.BaseFragment
 import com.mahnoosh.dashboard.R
@@ -48,10 +52,11 @@ class CategoryScreenFragment : BaseFragment() {
     }
 
     override fun setupUi() {
-
+        /*NO_OP*/
     }
 
     override fun setupCollectors() {
+        showLoader()
         viewModel.state
             .flowWithLifecycle(this.lifecycle)
             .onEach { dashboardState ->
@@ -59,6 +64,7 @@ class CategoryScreenFragment : BaseFragment() {
                     is DashboardState.Loading -> {}
                     is DashboardState.Categories -> {
                         allCats = dashboardState.categories
+                        hideLoader()
                         populateData()
                     }
                     is DashboardState.Error -> {}
@@ -71,12 +77,31 @@ class CategoryScreenFragment : BaseFragment() {
         /*NO_OP*/
     }
 
-    fun populateData() {
+    private fun showLoader() {
+        binding.apply {
+            loading.visibility = View.VISIBLE
+            content.visibility = View.GONE
+        }
+    }
+
+    private fun hideLoader() {
+        binding.apply {
+            loading.visibility = View.GONE
+            content.visibility = View.VISIBLE
+        }
+    }
+
+    private fun populateData() {
         position = requireArguments().getInt(ARG_POSITION)
         if (allCats != null) {
             val data = allCats?.get(position)
             binding.apply {
-                categoryImage.load(data?.image)
+                val imageLoader = categoryImage.context.imageLoader
+                val request = ImageRequest.Builder(categoryImage.context)
+                    .data(data?.image)
+                    .target(categoryImage)
+                    .build()
+                imageLoader.enqueue(request)
                 categoryText.text = data?.name
             }
         }
