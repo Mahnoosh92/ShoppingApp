@@ -69,23 +69,23 @@ dependencies {
     api "com.squareup.okhttp3:logging-interceptor:4.9.0"
 
     // Timber
-    api 'com.jakewharton.timber:timber:4.7.1'
+    api 'com.jakewharton.timber:timber:5.0.1'
 
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
     // Coroutine Lifecycle Scopes
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
-    api "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0"
+    api "androidx.lifecycle:lifecycle-runtime-ktx:2.6.0"
 
     // Coil
     api "io.coil-kt:coil:2.2.2"
 
     // Room
-    api "androidx.room:room-runtime:2.4.3"
-    api("androidx.room:room-ktx:2.4.3")
-    kapt "androidx.room:room-compiler:2.4.3"
+    api "androidx.room:room-runtime:2.5.0"
+    api("androidx.room:room-ktx:2.5.0")
+    kapt "androidx.room:room-compiler:2.5.0"
 
     // Lottie
     api 'com.airbnb.android:lottie:4.1.0'
@@ -121,5 +121,9 @@ dependencies {
     api 'com.google.firebase:firebase-crashlytics-ktx'
     api 'com.google.firebase:firebase-analytics-ktx'
 
+    // Shimmer
+    api 'com.facebook.shimmer:shimmer:0.1.0@aar'
 
+    // Material
+    implementation 'com.google.android.material:material:1.0.0'
 }

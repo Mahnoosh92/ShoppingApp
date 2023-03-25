@@ -1,6 +1,5 @@
 package com.mahnoosh.dashboard.data.models.local
 
-import com.google.gson.annotations.SerializedName
 import com.mahnoosh.dashboard.data.models.local.entity.CategoryEntity
 
 data class Category(

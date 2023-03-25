@@ -2,7 +2,6 @@ package com.mahnoosh.auth.presentation.login
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.mahnoosh.auth.R
 import com.mahnoosh.auth.databinding.FragmentLoginBinding
-import com.mahnoosh.auth.databinding.FragmentSplashBinding
-import com.mahnoosh.auth.presentation.splash.SplashIntent
-import com.mahnoosh.auth.presentation.splash.SplashViewModel
 import com.mahnoosh.core.base.BaseFragment
 import com.mahnoosh.utils.extensions.shortSnackBar
 import kotlinx.coroutines.launch

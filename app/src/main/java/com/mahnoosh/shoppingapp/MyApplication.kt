@@ -21,7 +21,9 @@ class MyApplication : Application() {
                     notificationModule,
                     persistentModule,
                     utilsModule,
-                    firebaseModule
+                    firebaseModule,
+                    DataSourceModule,
+                    RepositoryModule
                 )
             )
         }

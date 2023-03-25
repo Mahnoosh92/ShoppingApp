@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_16"
+    android:layout_marginVertical="@dimen/margin_8"
+    app:cardCornerRadius="@dimen/radius_12"
+    app:cardElevation="@dimen/elevation_10">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_16"
+        android:padding="@dimen/padding_10">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cat_prd_img"
+            android:layout_width="@dimen/fixed_100_dp"
+            android:layout_height="@dimen/fixed_100_dp"
+            android:background="@drawable/round_outline"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cat_prd_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            app:layout_constraintBottom_toTopOf="@id/cat_prd_price"
+            app:layout_constraintStart_toEndOf="@id/cat_prd_img"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cat_prd_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            app:layout_constraintBottom_toTopOf="@id/cat_prd_desc"
+            app:layout_constraintStart_toEndOf="@id/cat_prd_img"
+            app:layout_constraintTop_toBottomOf="@id/cat_prd_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cat_prd_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintBottom_toTopOf="@id/cat_prd_creationAt"
+            app:layout_constraintStart_toEndOf="@id/cat_prd_img"
+            app:layout_constraintTop_toBottomOf="@id/cat_prd_price" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cat_prd_creationAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cat_prd_img"
+            app:layout_constraintTop_toBottomOf="@id/cat_prd_desc" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -3,6 +3,7 @@ package com.mahnoosh.dashboard.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahnoosh.core.base.ResultWrapper
+import com.mahnoosh.core.domain.repository.UserRepository
 import com.mahnoosh.dashboard.domain.repository.CategoryRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -11,13 +12,17 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
+const val LIMIT = 20
+
 class DashboardViewModel(
     private val categoryRepository: CategoryRepository,
+    private val userRepository: UserRepository,
     private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
     val dashboardIntent = Channel<DashboardIntent>(Channel.UNLIMITED)
 
-    private val _state = MutableSharedFlow<DashboardState>(replay = 1, onBufferOverflow = BufferOverflow.DROP_LATEST)
+    private val _state =
+        MutableSharedFlow<DashboardState>(replay = 1, onBufferOverflow = BufferOverflow.DROP_LATEST)
     val state: SharedFlow<DashboardState>
         get() = _state
 
@@ -36,6 +41,7 @@ class DashboardViewModel(
             dashboardIntent.consumeAsFlow().collect {
                 when (it) {
                     is DashboardIntent.GetCategories -> getCategories()
+                    is DashboardIntent.SignOut -> signOut()
                 }
             }
         }
@@ -43,7 +49,7 @@ class DashboardViewModel(
 
     private fun getCategories() {
         viewModelScope.launch(exceptionHandler) {
-            categoryRepository.getCategories()
+            categoryRepository.getCategories(limit = LIMIT)
                 .flowOn(ioDispatcher)
                 .catch {
                     _state.emit(DashboardState.Error(error = it.message ?: "Something went wrong!"))
@@ -62,6 +68,16 @@ class DashboardViewModel(
                         }
                     }
                 }
+        }
+    }
+
+    private fun signOut() {
+        viewModelScope.launch(exceptionHandler) {
+            userRepository.signOut().flowOn(ioDispatcher).collect {
+                _state.emit(
+                    DashboardState.SignOut
+                )
+            }
         }
     }
 }

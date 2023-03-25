@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dashboard_nav_graph"
     app:startDestination="@id/categoryScreenContainerFragment">
 
     <fragment
         android:id="@+id/categoryScreenContainerFragment"
         android:name="com.mahnoosh.dashboard.presentation.screen.CategoryScreenContainerFragment"
-        android:label="CategoryScreenContainerFragment" />
+        android:label="CategoryScreenContainerFragment" >
+        <action
+            android:id="@+id/action_categoryScreenContainerFragment_to_categoryProductsFragment"
+            app:destination="@id/categoryProductsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryProductsFragment"
+        android:name="com.mahnoosh.dashboard.presentation.cat_products.CategoryProductsFragment"
+        android:label="fragment_category_products"
+        tools:layout="@layout/fragment_category_products" >
+        <argument
+            android:name="CatId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

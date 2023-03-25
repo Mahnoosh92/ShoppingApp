@@ -1,32 +1,29 @@
 package com.mahnoosh.dashboard.presentation.screen
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mahnoosh.core.base.BaseFragment
-import com.mahnoosh.dashboard.R
-import com.mahnoosh.dashboard.databinding.ActivityDashboardBinding
-import com.mahnoosh.dashboard.databinding.FragmentCategoryScreenBinding
 import com.mahnoosh.dashboard.databinding.FragmentCategoryScreenContainerBinding
 import com.mahnoosh.dashboard.presentation.DashboardIntent
 import com.mahnoosh.dashboard.presentation.DashboardState
 import com.mahnoosh.dashboard.presentation.DashboardViewModel
 import com.mahnoosh.dashboard.presentation.adapter.ScreenAdapter
+import com.mahnoosh.dashboard.presentation.click.ClickListener
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class CategoryScreenContainerFragment : BaseFragment() {
+class CategoryScreenContainerFragment : BaseFragment(), ClickListener {
 
     private var _binding: FragmentCategoryScreenContainerBinding? = null
     private val binding get() = _binding!!
@@ -59,11 +56,12 @@ class CategoryScreenContainerFragment : BaseFragment() {
                 is DashboardState.Loading -> {}
                 is DashboardState.Categories -> {
                     hideLoader()
-                    viewPager.adapter = ScreenAdapter(this, dashboardState.categories.size)
+                    viewPager.adapter = ScreenAdapter(this, dashboardState.categories.size, this)
                     TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                     }.attach()
                 }
                 is DashboardState.Error -> {}
+                else -> {}
             }
 
         }.launchIn(this.lifecycleScope)
@@ -85,5 +83,13 @@ class CategoryScreenContainerFragment : BaseFragment() {
             loading.visibility = View.GONE
             pager.visibility = View.VISIBLE
         }
+    }
+
+    override fun onClickCategory(catId: Int) {
+        findNavController().navigate(
+            CategoryScreenContainerFragmentDirections.actionCategoryScreenContainerFragmentToCategoryProductsFragment(
+                CatId = catId
+            )
+        )
     }
 }
