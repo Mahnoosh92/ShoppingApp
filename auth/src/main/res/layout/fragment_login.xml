@@ -68,6 +68,6 @@
                 android:padding="@dimen/padding_10"
                 android:text="@string/login" />
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
 
+    </com.google.android.material.card.MaterialCardView>
 </FrameLayout>

@@ -12,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.mahnoosh.auth.R
 import com.mahnoosh.auth.databinding.FragmentSplashBinding
+import com.mahnoosh.auth.presentation.AuthActivity
 import com.mahnoosh.core.base.BaseFragment
 import com.mahnoosh.utils.extensions.shortSnackBar
 import kotlinx.coroutines.launch
@@ -57,6 +58,7 @@ class SplashFragment : BaseFragment() {
                                     "com.mahnoosh.dashboard.presentation.DashboardActivity"
                                 )
                                 startActivity(intent)
+                                (requireActivity() as AuthActivity).finish()
                             }
                         }
                         is SplashState.Error -> {

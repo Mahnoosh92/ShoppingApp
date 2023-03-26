@@ -4,8 +4,9 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.mahnoosh.core.api.ApiService
 import com.mahnoosh.core.data.models.remote.RemoteProduct
+import kotlinx.coroutines.delay
 
-const val PAGE_SIZE = 1
+const val PAGE_SIZE = 3
 private const val INITIAL_LOAD_SIZE = 1
 
 class CategoryProductsPaging(

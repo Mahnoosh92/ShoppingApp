@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp"
-        android:visibility="gone"
+        android:visibility="visible"
+        tools:listitem="@layout/item_cat_product"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
@@ -22,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:visibility="gone"
         shimmer:duration="800">
 
         <LinearLayout
@@ -31,24 +33,23 @@
             android:layout_margin="@dimen/margin_8"
             android:orientation="vertical">
 
-            <include layout="@layout/cat_prd_shimmer" />
+            <include layout="@layout/item_cat_prd_shimmer" />
 
-            <include layout="@layout/cat_prd_shimmer" />
+            <include layout="@layout/item_cat_prd_shimmer" />
 
-            <include layout="@layout/cat_prd_shimmer" />
+            <include layout="@layout/item_cat_prd_shimmer" />
 
-            <include layout="@layout/cat_prd_shimmer" />
+            <include layout="@layout/item_cat_prd_shimmer" />
 
-            <include layout="@layout/cat_prd_shimmer" />
+            <include layout="@layout/item_cat_prd_shimmer" />
 
-            <include layout="@layout/cat_prd_shimmer" />
+            <include layout="@layout/item_cat_prd_shimmer" />
 
-            <include layout="@layout/cat_prd_shimmer" />
+            <include layout="@layout/item_cat_prd_shimmer" />
 
-            <include layout="@layout/cat_prd_shimmer" />
+            <include layout="@layout/item_cat_prd_shimmer" />
 
         </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
-
 </FrameLayout>

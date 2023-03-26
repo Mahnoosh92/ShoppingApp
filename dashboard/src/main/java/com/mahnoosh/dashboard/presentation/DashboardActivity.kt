@@ -42,6 +42,7 @@ class DashboardActivity : AppCompatActivity(), MenuProvider {
         super.onCreate(savedInstanceState)
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         loadKoinModules(
             listOf(
                 PersistentModule,
@@ -50,6 +51,12 @@ class DashboardActivity : AppCompatActivity(), MenuProvider {
                 ViewModelModule
             )
         )
+
+        setUpDrawer()
+        collectData()
+    }
+
+    private fun setUpDrawer() {
         binding.apply {
             toggle = ActionBarDrawerToggle(
                 this@DashboardActivity,
@@ -58,7 +65,8 @@ class DashboardActivity : AppCompatActivity(), MenuProvider {
                 R.string.close
             )
             this@DashboardActivity.toolbar = toolbar
-            setSupportActionBar(this@DashboardActivity.toolbar);
+            setSupportActionBar(this@DashboardActivity.toolbar)
+
             drawerLayout.addDrawerListener(toggle)
             toggle.syncState()
 
@@ -80,15 +88,22 @@ class DashboardActivity : AppCompatActivity(), MenuProvider {
                                 drawerLayout.close()
                             }).show()
                     }
+                    R.id.Products -> {
+                        val intent = Intent()
+                        intent.setClassName(
+                            binding.root.context,
+                            "com.mahnoosh.product.presentation.ProductActivity"
+                        )
+                        startActivity(intent)
+                    }
                 }
                 true
             }
         }
         this?.addMenuProvider(this, this)
-        setupUi()
     }
 
-    private fun setupUi() {
+    private fun collectData() {
         viewModel.state.flowWithLifecycle(this.lifecycle).onEach { dashboardState ->
             when (dashboardState) {
                 is DashboardState.Loading -> {}
@@ -102,7 +117,6 @@ class DashboardActivity : AppCompatActivity(), MenuProvider {
                     )
                     startActivity(intent)
                 }
-                else -> {}
             }
 
         }.launchIn(this.lifecycleScope)
@@ -116,14 +130,13 @@ class DashboardActivity : AppCompatActivity(), MenuProvider {
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(com.mahnoosh.dashboard.R.menu.top_manu, menu)
+        menuInflater.inflate(R.menu.top_manu, menu)
         this.menu = menu
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return true
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

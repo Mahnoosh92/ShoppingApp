@@ -12,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.mahnoosh.auth.R
 import com.mahnoosh.auth.databinding.FragmentLoginBinding
 import com.mahnoosh.auth.databinding.FragmentRegisterBinding
+import com.mahnoosh.auth.presentation.AuthActivity
 import com.mahnoosh.auth.presentation.login.LoginViewModel
 import com.mahnoosh.core.base.BaseFragment
 import com.mahnoosh.utils.extensions.shortSnackBar
@@ -27,8 +28,7 @@ class RegisterFragment : BaseFragment() {
     private val viewModel by viewModel<RegisterViewModel>()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
@@ -38,7 +38,7 @@ class RegisterFragment : BaseFragment() {
     }
 
     override fun setupCollectors() {
-        lifecycleScope.launch() {
+        lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.observe(viewLifecycleOwner) { registerState ->
                     when (registerState) {
@@ -50,6 +50,7 @@ class RegisterFragment : BaseFragment() {
                                     "com.mahnoosh.dashboard.presentation.DashboardActivity"
                                 )
                                 startActivity(intent)
+                                (requireActivity() as AuthActivity).finish()
                             }
                         }
                         is RegisterState.Error -> {
@@ -68,8 +69,7 @@ class RegisterFragment : BaseFragment() {
                 lifecycleScope.launch {
                     viewModel.registerIntent.send(
                         RegisterIntent.RegisterUser(
-                            emailRegister.text.toString(),
-                            passwordRegister.text.toString()
+                            emailRegister.text.toString(), passwordRegister.text.toString()
                         )
                     )
                 }

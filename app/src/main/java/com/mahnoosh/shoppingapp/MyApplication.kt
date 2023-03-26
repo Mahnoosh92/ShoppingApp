@@ -23,7 +23,8 @@ class MyApplication : Application() {
                     utilsModule,
                     firebaseModule,
                     DataSourceModule,
-                    RepositoryModule
+                    RepositoryModule,
+                    ProviderModule
                 )
             )
         }

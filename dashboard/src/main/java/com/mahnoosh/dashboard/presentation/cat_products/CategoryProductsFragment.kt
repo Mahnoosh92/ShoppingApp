@@ -9,6 +9,8 @@ import androidx.navigation.fragment.navArgs
 import com.mahnoosh.core.base.BaseFragment
 import com.mahnoosh.dashboard.databinding.FragmentCategoryProductsBinding
 import com.mahnoosh.dashboard.presentation.LIMIT
+import com.mahnoosh.dashboard.presentation.cat_products.adapter.CategoryProductsPagingAdapter
+import com.mahnoosh.dashboard.presentation.cat_products.adapter.LoadingStateAdapter
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,7 +27,7 @@ class CategoryProductsFragment : BaseFragment() {
 
     private var catId by Delegates.notNull<Int>()
 
-    private val cryptoListAdapter by lazy {
+    private val categoryProductsPagingAdapter by lazy {
         CategoryProductsPagingAdapter()
     }
 
@@ -39,13 +41,16 @@ class CategoryProductsFragment : BaseFragment() {
 
     override fun setupUi() {
         catId = args.CatId
-        binding.recyclerview.adapter = cryptoListAdapter
+        binding.recyclerview.adapter = categoryProductsPagingAdapter.withLoadStateFooter(
+            footer = LoadingStateAdapter(categoryProductsPagingAdapter::retry)
+        )
+
         lifecycleScope.launch {
             viewModel.catProductsIntent.send(
                 CategoryProductsIntent.GetCategoryProducts(
                     id = catId,
                     limit = LIMIT,
-                    offset = LIMIT
+                    offset = 1
                 )
             )
         }
@@ -53,16 +58,15 @@ class CategoryProductsFragment : BaseFragment() {
 
     override fun setupCollectors() {
         viewLifecycleOwner.lifecycleScope.launch {
-            delay(2500L)
             viewModel.state.observe(viewLifecycleOwner) {
                 when (it) {
                     is CategoryProductsState.Products -> {
                         with(binding) {
-                            shimmerViewContainer.stopShimmerAnimation();
-                            shimmerViewContainer.setVisibility(View.GONE);
+                            shimmerViewContainer.stopShimmerAnimation()
+                            shimmerViewContainer.visibility = View.GONE
                             recyclerview.visibility = View.VISIBLE
                         }
-                        cryptoListAdapter.submitData(lifecycle, it.products)
+                        categoryProductsPagingAdapter.submitData(lifecycle, it.products)
                     }
                     else -> {}
                 }

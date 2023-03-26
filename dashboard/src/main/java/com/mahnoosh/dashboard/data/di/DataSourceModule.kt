@@ -5,6 +5,8 @@ import com.mahnoosh.dashboard.data.datasource.local.category.CategoryLocalDataSo
 import com.mahnoosh.dashboard.data.datasource.local.category.DefaultCategoryLocalDataSource
 import com.mahnoosh.dashboard.data.datasource.remote.category.CategoryRemoteDataSource
 import com.mahnoosh.dashboard.data.datasource.remote.category.DefaultCategoryRemoteDataSource
+import com.mahnoosh.dashboard.data.datasource.remote.product.DefaultProductDataSource
+import com.mahnoosh.dashboard.data.datasource.remote.product.ProductDataSource
 import com.mahnoosh.dashboard.data.db.CategoryDao
 import com.mahnoosh.utils.IO_DISPATCHER
 import kotlinx.coroutines.CoroutineDispatcher
@@ -20,6 +22,9 @@ val DataSourceModule = module {
     factory {
         provideCategoryLocalDataSource(categoryDao = get())
     }
+    factory {
+        provideProductDataSource(apiService = get(), ioDispatcher = get(named(IO_DISPATCHER)))
+    }
 }
 
 private fun provideCategoryRemoteDataSource(
@@ -29,4 +34,10 @@ private fun provideCategoryRemoteDataSource(
 
 private fun provideCategoryLocalDataSource(categoryDao: CategoryDao): CategoryLocalDataSource =
     DefaultCategoryLocalDataSource(categoryDao)
+
+private fun provideProductDataSource(
+    apiService: ApiService,
+    ioDispatcher: CoroutineDispatcher
+): ProductDataSource =
+    DefaultProductDataSource(apiService = apiService, ioDispatcher = ioDispatcher)
 

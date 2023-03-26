@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.mahnoosh.auth.databinding.FragmentLoginBinding
+import com.mahnoosh.auth.presentation.AuthActivity
 import com.mahnoosh.core.base.BaseFragment
 import com.mahnoosh.utils.extensions.shortSnackBar
 import kotlinx.coroutines.launch
@@ -29,6 +30,7 @@ class LoginFragment : BaseFragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun setupUi() {
         /*NO_OP*/
     }
@@ -36,23 +38,24 @@ class LoginFragment : BaseFragment() {
     override fun setupCollectors() {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.state.observe(viewLifecycleOwner){loginState->
-                    when(loginState) {
+                viewModel.state.observe(viewLifecycleOwner) { loginState ->
+                    when (loginState) {
                         is LoginState.NoAccount -> {
                             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
                         }
                         is LoginState.LoginStatus -> {
-                            if(loginState.status) {
+                            if (loginState.status) {
                                 val intent = Intent()
                                 intent.setClassName(
                                     binding.root.context,
                                     "com.mahnoosh.dashboard.presentation.DashboardActivity"
                                 )
                                 startActivity(intent)
+                                (requireActivity() as AuthActivity).finish()
                             }
                         }
                         is LoginState.Error -> {
-                            binding.root.shortSnackBar(loginState.error.toString())
+                            binding.root.shortSnackBar(loginState.error)
                         }
                         is LoginState.Loading -> {}
                     }
@@ -70,7 +73,12 @@ class LoginFragment : BaseFragment() {
             }
             login.setOnClickListener {
                 lifecycleScope.launch {
-                    viewModel.loginIntent.send(LoginIntent.Login(emailLogin.text.toString(), passwordLogin.text.toString()))
+                    viewModel.loginIntent.send(
+                        LoginIntent.Login(
+                            emailLogin.text.toString(),
+                            passwordLogin.text.toString()
+                        )
+                    )
                 }
             }
         }

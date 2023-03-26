@@ -1,4 +1,4 @@
-package com.mahnoosh.dashboard.presentation.cat_products
+package com.mahnoosh.dashboard.presentation.cat_products.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,15 +7,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.mahnoosh.core.data.models.local.Product
-import com.mahnoosh.dashboard.databinding.CatProductItemBinding
+import com.mahnoosh.dashboard.databinding.ItemCatProductBinding
 
 class CategoryProductsPagingAdapter() :
     PagingDataAdapter<Product, CategoryProductsPagingAdapter.ViewHolder>(DiffUtilCallBack) {
 
-    private lateinit var binding: CatProductItemBinding
+    private lateinit var binding: ItemCatProductBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = CatProductItemBinding.inflate(
+        binding = ItemCatProductBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -27,7 +27,7 @@ class CategoryProductsPagingAdapter() :
         getItem(position)?.let { holder.bind(it) }
     }
 
-    inner class ViewHolder(private val binding: CatProductItemBinding) :
+    inner class ViewHolder(private val binding: ItemCatProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Product) {

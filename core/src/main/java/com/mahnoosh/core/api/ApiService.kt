@@ -15,4 +15,8 @@ interface ApiService {
     suspend fun getCategoryProducts(
         @Path("id") id: Int, @Query("limit") limit: Int, @Query("offset") offset: Int
     ): Response<List<RemoteProduct?>?>
+
+    @GET("products")
+    suspend fun getProducts(@Query("limit") limit: Int, @Query("offset") offset: Int): Response<List<RemoteProduct?>?>
+
 }

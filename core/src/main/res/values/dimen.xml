@@ -32,6 +32,8 @@
     <dimen name="font_size_26">24sp</dimen>
 
     <!-- elevation -->
+    <dimen name="elevation_2">2dp</dimen>
+    <dimen name="elevation_4">4dp</dimen>
     <dimen name="elevation_8">8dp</dimen>
     <dimen name="elevation_10">10dp</dimen>
     <dimen name="elevation_12">12dp</dimen>

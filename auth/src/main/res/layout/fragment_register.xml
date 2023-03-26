@@ -62,6 +62,6 @@
                 android:padding="@dimen/padding_10"
                 android:text="@string/register" />
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
 
+    </com.google.android.material.card.MaterialCardView>
 </FrameLayout>

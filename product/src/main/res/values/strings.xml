@@ -1,0 +1,9 @@
+<resources>
+    <string name="title_activity_product">ProductActivity</string>
+
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="general_error">Something went wrong!</string>
+
+
+</resources>

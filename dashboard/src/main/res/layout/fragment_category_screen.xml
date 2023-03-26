@@ -36,5 +36,4 @@
             android:gravity="center"
             tools:text="salam" />
     </LinearLayout>
-
 </com.google.android.material.card.MaterialCardView>

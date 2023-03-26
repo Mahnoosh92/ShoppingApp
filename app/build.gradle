@@ -52,4 +52,5 @@ dependencies {
     implementation project(':core')
     implementation project(':auth')
     implementation project(':dashboard')
+    implementation project(':product')
 }
