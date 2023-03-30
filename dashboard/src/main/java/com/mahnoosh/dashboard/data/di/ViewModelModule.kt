@@ -5,6 +5,7 @@ import com.mahnoosh.dashboard.domain.repository.CategoryRepository
 import com.mahnoosh.dashboard.presentation.DashboardViewModel
 import com.mahnoosh.dashboard.presentation.cat_products.CategoryProductsViewModel
 import com.mahnoosh.utils.IO_DISPATCHER
+import com.mahnoosh.utils.MAIN_DISPATCHER
 import kotlinx.coroutines.CoroutineDispatcher
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -16,7 +17,8 @@ val ViewModelModule = module {
         provideDashboardViewModel(
             categoryRepository = get(),
             userRepository = get(),
-            ioDispatcher = get(named(IO_DISPATCHER))
+            ioDispatcher = get(named(IO_DISPATCHER)),
+            mainDispatcher = get(named(MAIN_DISPATCHER))
         )
     }
     viewModel {
@@ -29,11 +31,13 @@ val ViewModelModule = module {
 private fun provideDashboardViewModel(
     categoryRepository: CategoryRepository,
     userRepository: UserRepository,
-    ioDispatcher: CoroutineDispatcher
+    ioDispatcher: CoroutineDispatcher,
+    mainDispatcher: CoroutineDispatcher
 ) = DashboardViewModel(
     categoryRepository = categoryRepository,
     ioDispatcher = ioDispatcher,
-    userRepository = userRepository
+    userRepository = userRepository,
+    mainDispatcher = mainDispatcher
 )
 
 private fun provideCategoryProductsViewModel(

@@ -6,7 +6,7 @@
     app:startDestination="@id/productListFragment">
     <fragment
         android:id="@+id/productListFragment"
-        android:name="com.mahnoosh.product.presentation.product_list.ProductListFragment"
+        android:name="com.mahnoosh.product.presentation.product.list.ProductListFragment"
         android:label="fragment_product_list"
         tools:layout="@layout/fragment_product_list" />
 </navigation>

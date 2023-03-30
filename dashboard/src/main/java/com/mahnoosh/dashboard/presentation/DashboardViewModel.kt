@@ -17,8 +17,10 @@ const val LIMIT = 20
 class DashboardViewModel(
     private val categoryRepository: CategoryRepository,
     private val userRepository: UserRepository,
-    private val ioDispatcher: CoroutineDispatcher
+    private val ioDispatcher: CoroutineDispatcher,
+    private val mainDispatcher: CoroutineDispatcher
 ) : ViewModel() {
+
     val dashboardIntent = Channel<DashboardIntent>(Channel.UNLIMITED)
 
     private val _state =
@@ -27,7 +29,7 @@ class DashboardViewModel(
         get() = _state
 
     private val exceptionHandler = CoroutineExceptionHandler { _, exception ->
-        viewModelScope.launch {
+        viewModelScope.launch(mainDispatcher) {
             _state.emit(DashboardState.Error(exception.message ?: "Something went wrong!"))
         }
     }
@@ -37,7 +39,7 @@ class DashboardViewModel(
     }
 
     private fun handleIntent() {
-        viewModelScope.launch(exceptionHandler) {
+        viewModelScope.launch(exceptionHandler + mainDispatcher) {
             dashboardIntent.consumeAsFlow().collect {
                 when (it) {
                     is DashboardIntent.GetCategories -> getCategories()
@@ -48,7 +50,7 @@ class DashboardViewModel(
     }
 
     private fun getCategories() {
-        viewModelScope.launch(exceptionHandler) {
+        viewModelScope.launch(exceptionHandler + mainDispatcher) {
             categoryRepository.getCategories(limit = LIMIT)
                 .flowOn(ioDispatcher)
                 .catch {
@@ -72,7 +74,7 @@ class DashboardViewModel(
     }
 
     private fun signOut() {
-        viewModelScope.launch(exceptionHandler) {
+        viewModelScope.launch(exceptionHandler + mainDispatcher) {
             userRepository.signOut().flowOn(ioDispatcher).collect {
                 _state.emit(
                     DashboardState.SignOut

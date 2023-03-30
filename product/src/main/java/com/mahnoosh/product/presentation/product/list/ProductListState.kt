@@ -1,4 +1,4 @@
-package com.mahnoosh.product.presentation.product_list
+package com.mahnoosh.product.presentation.product.list
 
 import com.mahnoosh.core.data.models.local.Product
 

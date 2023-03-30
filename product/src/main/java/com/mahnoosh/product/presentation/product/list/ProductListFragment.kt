@@ -1,13 +1,11 @@
-package com.mahnoosh.product.presentation.product_list
+package com.mahnoosh.product.presentation.product.list
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.mahnoosh.core.base.BaseFragment
-import com.mahnoosh.product.R
 import com.mahnoosh.product.data.datasource.remote.product.adapter.ProductListAdapterListAdapter
 import com.mahnoosh.product.databinding.FragmentProductListBinding
 import com.mahnoosh.utils.extensions.shortSnackBar
