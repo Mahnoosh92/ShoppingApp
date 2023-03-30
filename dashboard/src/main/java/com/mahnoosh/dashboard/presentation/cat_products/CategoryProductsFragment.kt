@@ -57,6 +57,7 @@ class CategoryProductsFragment : BaseFragment() {
     }
 
     override fun setupCollectors() {
+        sfsdfdsfsfs
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.state.observe(viewLifecycleOwner) {
                 when (it) {
