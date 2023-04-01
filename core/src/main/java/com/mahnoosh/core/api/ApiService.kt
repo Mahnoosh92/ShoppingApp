@@ -1,5 +1,6 @@
 package com.mahnoosh.core.api
 
+import com.mahnoosh.core.data.models.remote.RemoteCart
 import com.mahnoosh.core.data.models.remote.RemoteProduct
 import com.mahnoosh.dashboard.data.models.remote.RemoteCategory
 import retrofit2.Response
@@ -17,6 +18,14 @@ interface ApiService {
     ): Response<List<RemoteProduct?>?>
 
     @GET("products")
-    suspend fun getProducts(@Query("limit") limit: Int, @Query("offset") offset: Int): Response<List<RemoteProduct?>?>
+    suspend fun getProducts(
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int
+    ): Response<List<RemoteProduct?>?>
 
+    @GET("products/{id}")
+    suspend fun getProduct(@Path("id") id: Int): Response<RemoteProduct?>
+
+    @GET("carts")
+    suspend fun getCarts(): Response<RemoteCart?>
 }

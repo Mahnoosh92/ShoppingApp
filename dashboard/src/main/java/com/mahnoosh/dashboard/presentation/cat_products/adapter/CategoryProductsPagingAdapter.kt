@@ -9,7 +9,7 @@ import coil.load
 import com.mahnoosh.core.data.models.local.Product
 import com.mahnoosh.dashboard.databinding.ItemCatProductBinding
 
-class CategoryProductsPagingAdapter() :
+class CategoryProductsPagingAdapter(private val onClick: (Int?) -> Unit) :
     PagingDataAdapter<Product, CategoryProductsPagingAdapter.ViewHolder>(DiffUtilCallBack) {
 
     private lateinit var binding: ItemCatProductBinding
@@ -37,6 +37,9 @@ class CategoryProductsPagingAdapter() :
                 catPrdTitle.text = item.title.toString()
                 catPrdDesc.text = item.description
                 catPrdCreationAt.text = item.creationAt
+                root.setOnClickListener {
+                    onClick(item.id)
+                }
             }
         }
     }

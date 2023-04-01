@@ -53,4 +53,5 @@ dependencies {
     implementation project(':auth')
     implementation project(':dashboard')
     implementation project(':product')
+    implementation project(':cart')
 }

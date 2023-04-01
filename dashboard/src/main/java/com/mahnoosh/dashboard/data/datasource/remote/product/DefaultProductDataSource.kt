@@ -15,8 +15,7 @@ class DefaultProductDataSource(
 ) : ProductDataSource {
 
     override suspend fun getProducts(
-        limit: Int,
-        offset: Int
+        limit: Int, offset: Int
     ): Flow<ResultWrapper<Exception, List<Product?>?>> {
         val result = apiService.getProducts(limit = limit, offset = offset)
         return flow {
@@ -37,6 +36,17 @@ class DefaultProductDataSource(
             emit(ResultWrapper.build {
                 throw java.lang.Exception(it.message ?: "Something went wrong!")
             })
+        }
+    }
+
+    override suspend fun getProduct(id: Int): Flow<ResultWrapper<Exception, Product?>> {
+        val result = apiService.getProduct(id = id)
+        return flow {
+            if (result.isSuccessful) {
+                emit(ResultWrapper.build { result.body()?.toProduct() })
+            } else {
+                emit(ResultWrapper.build { throw java.lang.Exception(result.getApiError()?.message) })
+            }
         }
     }
 }

@@ -31,6 +31,7 @@ import org.koin.core.context.unloadKoinModules
 class DashboardActivity : AppCompatActivity(), MenuProvider {
 
     private lateinit var binding: ActivityDashboardBinding
+
     lateinit var toggle: ActionBarDrawerToggle
     lateinit var toolbar: Toolbar
     private lateinit var menu: Menu
@@ -96,6 +97,14 @@ class DashboardActivity : AppCompatActivity(), MenuProvider {
                         )
                         startActivity(intent)
                     }
+                    R.id.Cart -> {
+                        val intent = Intent()
+                        intent.setClassName(
+                            binding.root.context,
+                            "com.mahnoosh.cart.presentation.CartActivity"
+                        )
+                        startActivity(intent)
+                    }
                 }
                 true
             }
@@ -113,7 +122,7 @@ class DashboardActivity : AppCompatActivity(), MenuProvider {
                     val intent = Intent()
                     intent.setClassName(
                         binding.root.context,
-                        "com.mahnoosh.dashboard.presentation.AuthActivity"
+                        "com.mahnoosh.auth.presentation.AuthActivity"
                     )
                     startActivity(intent)
                 }

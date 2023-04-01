@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.mahnoosh.core.base.BaseFragment
 import com.mahnoosh.dashboard.databinding.FragmentCategoryProductsBinding
@@ -28,12 +29,19 @@ class CategoryProductsFragment : BaseFragment() {
     private var catId by Delegates.notNull<Int>()
 
     private val categoryProductsPagingAdapter by lazy {
-        CategoryProductsPagingAdapter()
+        CategoryProductsPagingAdapter() {
+            it?.let {
+                findNavController().navigate(
+                    CategoryProductsFragmentDirections.actionCategoryProductsFragmentToDetailsFragment(
+                        productId = it
+                    )
+                )
+            }
+        }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCategoryProductsBinding.inflate(inflater, container, false)
         return binding.root
@@ -48,16 +56,13 @@ class CategoryProductsFragment : BaseFragment() {
         lifecycleScope.launch {
             viewModel.catProductsIntent.send(
                 CategoryProductsIntent.GetCategoryProducts(
-                    id = catId,
-                    limit = LIMIT,
-                    offset = 1
+                    id = catId, limit = LIMIT, offset = 1
                 )
             )
         }
     }
 
     override fun setupCollectors() {
-        dgdfgdfgdfg
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.state.observe(viewLifecycleOwner) {
                 when (it) {
