@@ -1,7 +1,6 @@
-package com.mahnoosh.shoppingapp
+package com.mahnoosh
 
 import android.app.Application
-import com.mahnoosh.auth.data.di.viewModelModule
 import com.mahnoosh.core.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger

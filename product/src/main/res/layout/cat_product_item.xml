@@ -19,7 +19,6 @@
             android:id="@+id/cat_prd_img"
             android:layout_width="@dimen/fixed_100_dp"
             android:layout_height="@dimen/fixed_100_dp"
-            android:background="@drawable/round_outline"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"

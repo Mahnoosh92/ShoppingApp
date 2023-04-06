@@ -6,7 +6,7 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-class DefaultAuthDataSource(
+class TestAuthDataSource(
     private val auth: FirebaseAuth
 ) : AuthDataSource {
     override suspend fun signInWithEmailAndPassword(email: String, password: String): AuthResult =
@@ -43,9 +43,4 @@ class DefaultAuthDataSource(
 
         }
     }
-}
-
-interface LogInListener {
-    fun logInSuccess(email: String?, password: String?)
-    fun logInFailure(exception: java.lang.Exception?, email: String?, password: String?)
 }

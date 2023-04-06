@@ -11,15 +11,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/shimmer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/card_edge">
+        android:layout_height="wrap_content">
 
         <View
             android:id="@+id/cat_prd_img_shimmer"
             android:layout_width="@dimen/fixed_100_dp"
             android:layout_height="@dimen/fixed_100_dp"
             android:layout_margin="@dimen/margin_8"
-            android:background="@drawable/round_outline"
             android:backgroundTint="@color/shimmer_background"
             android:clipToOutline="true"
             app:layout_constraintBottom_toBottomOf="parent"

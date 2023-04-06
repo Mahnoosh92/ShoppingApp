@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
 class DefaultUserRepository(
-   private val userDataSource: UserDataSource, private val ioDispatcher: CoroutineDispatcher
+    private val userDataSource: UserDataSource, private val ioDispatcher: CoroutineDispatcher
 ) : UserRepository {
     override fun getUser(): Flow<ResultWrapper<Exception, FirebaseUser?>> {
         return userDataSource.getUser().map {

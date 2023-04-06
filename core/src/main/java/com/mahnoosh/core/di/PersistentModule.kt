@@ -1,12 +1,7 @@
 package com.mahnoosh.core.di
 
 import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.emptyPreferences
-import androidx.datastore.preferences.preferencesDataStoreFile
+
 import androidx.room.Room
 import com.mahnoosh.core.data.db.AppDataBase
 import kotlinx.coroutines.CoroutineScope
@@ -23,9 +18,9 @@ val persistentModule = module {
     single {
         provideAppDatabase(appContext = androidContext())
     }
-    single {
-        providePreferencesDataStore(appContext = androidContext())
-    }
+//    single {
+//        providePreferencesDataStore(appContext = androidContext())
+//    }
     single {
         provideTestDao(db = get())
     }
@@ -38,10 +33,10 @@ private fun provideAppDatabase(appContext: Context) = Room.databaseBuilder(
     .build()
 
 private fun provideTestDao(db: AppDataBase) = db.testDao()
-private fun providePreferencesDataStore(appContext: Context): DataStore<Preferences> {
-    return PreferenceDataStoreFactory.create(
-        corruptionHandler = ReplaceFileCorruptionHandler(produceNewData = { emptyPreferences() }),
-        scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
-        produceFile = { appContext.preferencesDataStoreFile(ON_BOARDING_PREFERENCES) }
-    )
-}
+//private fun providePreferencesDataStore(appContext: Context): DataStore<Preferences> {
+//    return PreferenceDataStoreFactory.create(
+//        corruptionHandler = ReplaceFileCorruptionHandler(produceNewData = { emptyPreferences() }),
+//        scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
+//        produceFile = { appContext.preferencesDataStoreFile(ON_BOARDING_PREFERENCES) }
+//    )
+//}
