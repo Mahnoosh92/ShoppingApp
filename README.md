@@ -4,6 +4,7 @@ An app for shopping with detail and profile pages
 <br />
 # Technologies & Methodologies which used:
 - MVI Pattern
+- Clean-architecture
 - Koin
 - LiveData & Flow
 - Coil(Image Loader)
